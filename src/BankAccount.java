@@ -1,5 +1,6 @@
+import java.util.Scanner;
 public class BankAccount {
-    int balance;
+    private int balance;
 
     public BankAccount(int balance) {
         this.balance = balance;
@@ -10,17 +11,6 @@ public class BankAccount {
     }
 
     public void deposit(int amount) {
-
-
-        // add catch & try for catching the exceptions
-//        while(true) {
-//            try {
-//                balance += amount;
-//            }
-//            catch(IllegalArgumentException e) {
-//                System.out.println("Amount for increasing should be greater than zero");
-//            }
-//        }
         if (amount <= 0) {
             throw new IllegalArgumentException("Amount for increasing should be greater than zero");
         } else {
@@ -34,26 +24,22 @@ public class BankAccount {
         } else {
             balance -= amount;
         }
-
     }
 
     public void printBalance() {
         System.out.println("The current balance: " + balance);
-
     }
 
-//    method for transfer balance from one bank account to another
     public void transferBalance(int amount, BankAccount transferBalanceTo) {
     if (amount <= 0) {
         System.out.println("Transfer amount should be greater than zero");
-        return;
-    }
-    if (this.balance < amount) {
+    } else if (balance < amount) {
         System.out.println("Your balance is less than the amount you want to transfer");
     }
-
-    this.balance -= amount;
+    else {
+        this.balance -= amount;
         transferBalanceTo.deposit(amount);
+        System.out.println("Successfully transferred");
     }
-
+    }
 }

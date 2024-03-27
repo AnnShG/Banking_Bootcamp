@@ -12,38 +12,52 @@
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
 
         BankAccount one = new BankAccount(150);
         BankAccount two = new BankAccount(0); // an empty to transfer to
 
-        // a menu for the user to decide if he wants to increase, decrease or transfer
+        boolean loop = true;
+        while(loop) {
+            displayMenu();
+            int choice = input.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the amount to increase your balance: ");
+                    int increaseBalance = input.nextInt();
+                    one.deposit(increaseBalance);
+                    break;
+                case 2:
+                    System.out.print("Enter the amount to decrease your balance: ");
+                    int decreaseBalance = input.nextInt();
+                    one.withdraw(decreaseBalance);
+                    break;
+                case 3:
+                    System.out.print("Enter the amount you want to transfer from one account to another: ");
+                    int transferAmount = input.nextInt();
 
-
-        System.out.print("Enter the amount to increase your balance: ");
-        int increaseBalance = scanner.nextInt();
-        one.deposit(increaseBalance);
-
-        one.printBalance();
-
-        System.out.print("Enter the amount to decrease your balance: ");
-        int decreaseBalance = scanner.nextInt();
-        one.withdraw(decreaseBalance);
-
-        one.printBalance();
-
-        System.out.print("Enter the amount you want to transfer from one account to another: ");
-        int transferAmount = scanner.nextInt();
-
-        one.transferBalance(transferAmount, two);
-
-        one.printBalance();
-        two.printBalance();
-
-
-
-
-
-
+                    one.transferBalance(transferAmount, two);
+                    break;
+                case 4:
+                    one.printBalance();
+                    two.printBalance();
+                    break;
+                case 5:
+                    loop = false;
+                    break;
+                default:
+                    System.out.println("Invalid input");
+            }
+        }
+        input.close();
+    }
+    public static void displayMenu() {
+        System.out.println(" ");
+        System.out.println("1 - Increase the balance");
+        System.out.println("2 - Decrease the balance");
+        System.out.println("3 - Transfer the balance from one account to another");
+        System.out.println("4 - Print the current balance");
+        System.out.println("5 - Exit");
+        System.out.print("Enter one of the options: ");
     }
 }
