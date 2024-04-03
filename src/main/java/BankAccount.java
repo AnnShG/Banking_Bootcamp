@@ -1,36 +1,46 @@
-import java.util.Scanner;
 public class BankAccount {
-    private int balance;
+    private double balance;
+    private final String login;
+//    private int password;
 
-    public BankAccount(int balance) {
+    public BankAccount(double balance, String login) {
         this.balance = balance;
+        this.login = login;
+//        this.password = password;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
+    public double getBalance() {
+        return balance;
+    }
+    public String getLogin() {
+        return login;
+    }
 
-    public void deposit(int amount) {
+//    public int getPassword() {
+//        return password;
+//    }
+
+    public void deposit(double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("Amount for increasing should be greater than zero");
         } else {
-            balance += amount;
+            this.balance += amount;
+
         }
     }
 
-    public void withdraw(int amount) {
+    public void withdraw(double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("Amount for decreasing should be greater than zero");
         } else {
-            balance -= amount;
+            this.balance -= amount;
         }
     }
 
-    public void printBalance() {
-        System.out.println("The current balance: " + balance);
-    }
-
-    public void transferBalance(int amount, BankAccount transferBalanceTo) {
+    public void transferBalance(double amount, BankAccount transferBalanceTarget) {
     if (amount <= 0) {
         System.out.println("Transfer amount should be greater than zero");
     } else if (balance < amount) {
@@ -38,8 +48,9 @@ public class BankAccount {
     }
     else {
         this.balance -= amount;
-        transferBalanceTo.deposit(amount);
+        transferBalanceTarget.deposit(amount);
         System.out.println("Successfully transferred");
     }
     }
+
 }
